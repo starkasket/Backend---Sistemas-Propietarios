@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Models;
 
-[Index(nameof(Name), IsUnique = true)]
+
 public class Brand
 {
     [Key]
@@ -13,6 +13,11 @@ public class Brand
     public int BrandId { get; set; }
 
     public string Name { get; set; }
+
+    public int SupplierId { get; set; }
+    [ForeignKey("SupplierId")]
+
+    public virtual Supplier Supplier { get; set; }
 
 
 

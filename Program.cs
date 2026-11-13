@@ -20,14 +20,34 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddHttpClient<IPostService, PostService>(c => c.BaseAddress = new Uri(builder.Configuration["BaseUrlPost"]));
 builder.Services.AddScoped<IValidator<BeerInsertDto>, BeerInsertValidator>();
 builder.Services.AddScoped<IValidator<BeerUpdateDto>, BeerUpdateValidator>();
+
 builder.Services.AddScoped<IValidator<BrandInsertDto>, BrandInsertValidator>();
 builder.Services.AddScoped<IValidator<BrandUpdateDto>, BrandUpdateValidator>();
+
+builder.Services.AddScoped<IValidator<InventoryInsertDto>, InventoryInsertValidator>();
+builder.Services.AddScoped<IValidator<InventoryUpdateDto>, InventoryUpdateValidator>();
+
+builder.Services.AddScoped<IValidator<SupplierInsertDto>, SupplierInsertValidator>();
+builder.Services.AddScoped<IValidator<SupplierUpdateDto>, SupplierUpdateValidator>();
+
+builder.Services.AddScoped<IValidator<SaleInsertDto>, SaleInsertValidator>();
+builder.Services.AddScoped<IValidator<SaleUpdateDto>, SaleUpdateValidator>();
+
+
 
 //builder.Services.AddScoped<IBeerService, BeerService>();
 builder.Services.AddKeyedScoped<ICommonService<BeerDto, BeerInsertDto, BeerUpdateDto>, BeerService>("beerService");
 builder.Services.AddKeyedScoped<ICommonService<BrandDto, BrandInsertDto, BrandUpdateDto>, BrandService>("brandService");
+builder.Services.AddKeyedScoped<ICommonService<InventoryDto, InventoryInsertDto, InventoryUpdateDto>, InventoryService>("inventoryService");
+builder.Services.AddKeyedScoped<ICommonService<SupplierDto, SupplierInsertDto, SupplierUpdateDto>, SupplierService>("supplierService");
+builder.Services.AddKeyedScoped<ICommonService<SaleDto, SaleInsertDto, SaleUpdateDto>, SaleService>("saleService");
+
 builder.Services.AddScoped<IRepository<Beer>, BeerRepository>();
 builder.Services.AddScoped<IRepository<Brand>, BrandRepository>();
+builder.Services.AddScoped<IRepository<Inventory>, InventoryRepository>();
+builder.Services.AddScoped<IRepository<Supplier>, SupplierRepository>();
+builder.Services.AddScoped<IRepository<Sale>, SaleRepository>();
+
 builder.Services.AddDbContext<StoreContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("StoreConnection"));
